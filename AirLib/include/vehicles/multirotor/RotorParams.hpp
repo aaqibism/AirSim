@@ -43,7 +43,6 @@ namespace msr {
             real_T max_speed; // in radians per second
             real_T max_speed_square;
             real_T max_thrust = 4.179446268f;
-            // real_T max_thrust = 4.179446268f; //computed from above formula for the given constants
             real_T max_torque = 0.055562f; //computed from above formula
 
             // call this method to recalculate thrust if you want to use different numbers for C_T, C_P, max_rpm, etc.
