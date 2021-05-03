@@ -211,15 +211,11 @@ protected: //static utility functions for derived classes to use
             6 CW: 67.5 from +X
             7 CW: 67.5 from -X
             
-            px4_info
-
             */
 
             // vectors below are rotated according to NED left hand rule (so the vectors are rotated counter clockwise).
-            // Quaternionr octo_rot45(AngleAxisr(M_PIf / 4, unit_z)); // 45 degrees
             Quaternionr octo_rot22(AngleAxisr(M_PIf / 8, unit_z)); // 22.5 degrees
             Quaternionr octo_rot67(AngleAxisr(3* M_PIf / 8, unit_z)); // 67.5 degrees
-            // Quaternionr no_rot(AngleAxisr(0, unit_z));
             
             rotor_poses.emplace_back(VectorMath::rotateVector(
                 Vector3r(0, arm_lengths[0], rotor_z), octo_rot67, true),
@@ -360,7 +356,6 @@ protected: //static utility functions for derived classes to use
         //dimensions are for F450 frame: http://artofcircuits.com/product/quadcopter-frame-hj450-with-power-distribution
         params.rotor_count = 8;
         std::vector<real_T> arm_lengths(params.rotor_count, 0.2275f); // 0.55
-        // std::vector<real_T> arm_lengths(params.rotor_count, 0.55f); // 0.55
 
         //set up mass
         //this has to be between max_thrust*rotor_count/10 (2.5kg using default parameters in RotorParams.hpp) and (idle throttle percentage)*max_thrust*rotor_count/10 (1.25kg using default parameters and SimpleFlight)
@@ -370,7 +365,6 @@ protected: //static utility functions for derived classes to use
         // params.mass = 1.0f; //can be varied from 0.800 to 1.600 20 pounds
         params.mass = 1.0f; //can be varied from 0.800 to 1.600 20 pounds
         real_T motor_assembly_weight = 0.055f;  //weight for MT2212 motor for F450 frame  0.148
-        // real_T motor_assembly_weight = 0.148f;  //weight for MT2212 motor for F450 frame  0.148
         real_T box_mass = params.mass - params.rotor_count * motor_assembly_weight;
 
         // using rotor_param default, but if you want to change any of the rotor_params, call calculateMaxThrust() to recompute the max_thrust
@@ -379,7 +373,6 @@ protected: //static utility functions for derived classes to use
 
         //set up dimensions of core body box or abdomen (not including arms).
         params.body_box.x() = 0.180f; params.body_box.y() = 0.11f; params.body_box.z() = 0.040f; // y:155 , x:250 , z:50
-        // params.body_box.x() = 0.250f; params.body_box.y() = 0.155f; params.body_box.z() = 0.050f; // y:155 , x:250 , z:50
         real_T rotor_z = 2.5f / 100;
 
         //computer rotor poses
